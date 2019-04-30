@@ -44,8 +44,6 @@ public class ATM extends Account {
         System.out.println("Please enter your pin: ");
         int pinNum = input.nextInt();
         input.nextLine();
-        System.out.println(getPin());
-        System.out.println(getAccountNumber());
 
 
         //validate information
