@@ -1,10 +1,10 @@
 package com.company;
 
 public class Account {
-    private String accountNumber;
-    private String userName;
+    private String accountNumber="";
+    private String userName="";
     private int balance;
-    private int pin;
+    private int pin=0;
 
     public Account(){
 

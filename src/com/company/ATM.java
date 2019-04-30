@@ -1,53 +1,18 @@
 package com.company;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ATM extends Account {
     Scanner input = new Scanner(System.in);
     private int withdraw = 0;
     private int deposit = 0;
+    ArrayList<ATM> users = new ArrayList<>();
 
 
     //Constructor
-    public ATM() {
-        //Asking user inputs
-        System.out.println("\n\nPlease enter your account number: ");
-        String accNum = input.nextLine();
+    public ATM(){}
 
-        System.out.println("Please enter your pin: ");
-        int pinNum = input.nextInt();
-
-
-        String choice = "y";
-//        while(choice.equalsIgnoreCase("y")) {
-//            System.out.println("1. Check balance");
-//            System.out.println("2. Withdraw money");
-//            System.out.println("3. deposit money");
-//            System.out.println("Enter option: ");
-//            int a = input.nextInt();
-//
-//            switch (a) {
-//                case 1:
-//                    System.out.print("Balance: $");
-//                    this.getBalance();
-//                    break;
-//                case 2:
-//                    System.out.print("Withdraw amount: $");
-//                    setWithdraw(input.nextInt());
-//                    break;
-//                case 3:
-//                    System.out.println("Deposit amount: $");
-//                    setDeposit(input.nextInt());
-//                    break;
-//                default:
-//                    System.out.println("Invalid Option");
-//                    break;
-//            }
-//
-//            System.out.println("Would you like to make another transaction? (y/n)");
-//            choice = input.nextLine();
-//        }
-    }
 
 
     public int getWithdraw() {
@@ -72,42 +37,83 @@ public class ATM extends Account {
     }
 
     public void interact() {
+
         //Asking user inputs
         System.out.println("Please enter your account number: ");
         String accNum = input.nextLine();
 
         System.out.println("Please enter your pin: ");
         int pinNum = input.nextInt();
+        input.nextLine();
+        System.out.println(getPin());
+        System.out.println(getAccountNumber());
 
+
+        //validate information
+        if(pinNum == getPin() && accNum.equals(getAccountNumber())) {
+            options();
+            System.out.println(getBalance());
+        }
+        else {
+            System.out.println("ERROR");
+
+            boolean wrong = true;
+            int i = 0;
+            while (!wrong && i < 2) {
+                setPin(0);
+                System.out.println("Please enter your account number: ");
+                accNum = input.nextLine();
+
+
+                System.out.println("Please enter your pin: ");
+                pinNum = input.nextInt();
+                input.nextLine();
+                i++;
+
+                if(pinNum == getPin() && accNum.equals(getAccountNumber())) {
+                    options();
+                    System.out.println(getBalance());
+                    wrong = true;
+                }
+            }
+        }
+    }
+
+    public void options(){
+        System.out.println("Choose an option: ");
 
         //Option at the ATM
         String choice = "y";
         while (choice.equalsIgnoreCase("y")) {
-            System.out.println("1. Check balance");
+            System.out.println("\n1. Check balance");
             System.out.println("2. Withdraw money");
             System.out.println("3. deposit money");
             System.out.println("Enter option: ");
             int a = input.nextInt();
+            input.nextLine();
 
             switch (a) {
                 case 1:
-                    System.out.print("Balance: $");
-                    super.getBalance();
+                    System.out.print("Balance: $" + super.getBalance());
                     break;
                 case 2:
-                    System.out.print("Withdraw amount: $");
+                    System.out.print("Withdraw amount: $" );
                     setWithdraw(input.nextInt());
+                    System.out.println("Balance: $" + this.getBalance());
+                    input.nextLine();
                     break;
                 case 3:
-                    System.out.println("Deposit amount: $");
+                    System.out.print("Deposit amount: $");
                     setDeposit(input.nextInt());
+                    System.out.println("Balance: $" + this.getBalance());
+                    input.nextLine();
                     break;
                 default:
                     System.out.println("Invalid Option");
                     break;
             }
 
-            System.out.println("Would you like to make another transaction? (y/n");
+            System.out.println("\nWould you like to make another transaction? (y/n)");
             choice = input.nextLine();
         }
     }
