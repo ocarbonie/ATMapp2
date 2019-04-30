@@ -1,18 +1,17 @@
 package com.company;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Scanner;
 
 public class ATM extends Account {
     Scanner input = new Scanner(System.in);
     private int withdraw = 0;
     private int deposit = 0;
-    ArrayList<ATM> users = new ArrayList<>();
-
 
     //Constructor
     public ATM(){}
-
 
 
     public int getWithdraw() {
@@ -52,7 +51,7 @@ public class ATM extends Account {
         //validate information
         if(pinNum == getPin() && accNum.equals(getAccountNumber())) {
             options();
-            System.out.println(getBalance());
+            System.out.println("Balance: $" + getBalance());
         }
         else {
             System.out.println("ERROR");
@@ -72,7 +71,7 @@ public class ATM extends Account {
 
                 if(pinNum == getPin() && accNum.equals(getAccountNumber())) {
                     options();
-                    System.out.println(getBalance());
+                    System.out.println("Balance: $" + getBalance());
                     wrong = true;
                 }
             }
